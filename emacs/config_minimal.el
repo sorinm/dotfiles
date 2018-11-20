@@ -19,8 +19,6 @@
    (makunbound 'gc-cons-threshold-original)
    (makunbound 'file-name-handler-alist-original)))
 
-
-
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -42,6 +40,10 @@
 (add-hook 'compilation-filter-hook 'my/colorize-compilation-buffer)
 
 (defvar compilation-scroll-output t)
+
+(add-to-list
+ 'command-switch-alist
+ '("-cwd" . (lambda (x) (setq default-directory (or x (getenv "PWD"))))))
 
 (defun my/toggle-show-trailing-whitespace ()
   "Toggle 'show-trailing-whitespace' between t and nil."
